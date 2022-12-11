@@ -17,6 +17,11 @@ class Queue:
     def dequeue(self):
         return self._elements.popleft()
     
+class Stack(Queue):
+    def dequeue(self):
+        return self._elements.pop()
+    
+    
 # from queues import Queue
 
 # create object
@@ -37,3 +42,6 @@ class Queue:
 #for element in fifo:
 #   print(element)
 #len(fifo)
+
+#from queue import Stack
+#lifo = Stack(1,2,3)
