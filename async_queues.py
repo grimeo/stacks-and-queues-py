@@ -13,6 +13,14 @@ class Job(NamedTuple):
     url: str
     depth: int = 1
 
+class Job(NamedTuple):
+    url: str
+    depth: int = 1
+
+    def __lt__(self, other):
+        if isinstance(other, Job):
+            return len(self.url) < len(other.url)
+
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("url")
