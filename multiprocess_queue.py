@@ -11,6 +11,7 @@ import argparse
 import queue
 import time
 
+POISION_PILL = None
 
 def reverse_md5(hash_value, alphabet=ascii_lowercase, max_length=6):
     for length in range(1, max_length + 1):
@@ -57,6 +58,9 @@ class Worker(multiprocessing.Process):
     def run(self):
         while True:
             job = self.queue_in.get()
+            if job is POISON_PILL:
+                self.queue_in.put(POISON_PILL)
+                break
             if plaintext := job(self.hash_value):
                 self.queue_out.put(plaintext)
                 break
